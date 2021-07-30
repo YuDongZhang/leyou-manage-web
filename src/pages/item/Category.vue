@@ -12,7 +12,7 @@
       </v-flex>
   </v-card>
 </template>
-
+<!--上面的标签是怎么请求到  api.leyou.com 这路径的 , 从 http.js找到 config.js , 已经前端报的  No 'Access-Control-Allow-Origin 跨域问题-->
 <script>
   import {treeData} from "../../mockDB";
   //下面treedata:[],由于数据模型和数据内容一样,可以省略,写成 treedata
