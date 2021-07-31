@@ -61,10 +61,10 @@
       submit() {
         // 表单校验
         if (this.$refs.myBrandForm.validate()) {
-          // 定义一个请求参数对象，通过解构表达式来获取brand中的属性
-          const {categories, letter, ...params} = this.brand;
+          // 定义一个请求参数对象，通过解构表达式来获取brand中的属性{categories, letter,name,image}
+          const {categories, letter, ...params} = this.brand;//params:{name,image} //解构表达式的学习 ,解构,分解构造的意思
           // 数据库中只要保存分类的id即可，因此我们对categories的值进行处理,只保留id，并转为字符串
-          params.cids = categories.map(c => c.id).join(",");
+          params.cids = categories.map(c => c.id).join(",");//这个写法和java不一样,直接添加cids这个属性,这个属是以字符串分割的,后台可以通过list接收
           // 将字母都处理为大写
           params.letter = letter.toUpperCase();
           // 将数据提交到后台
@@ -72,7 +72,7 @@
           this.$http({
             method: this.isEdit ? 'put' : 'post',
             url: '/item/brand',
-            data: params
+            data: this.$qs.stringify(params)
           }).then(() => {
             // 关闭窗口
             this.$emit("close");
